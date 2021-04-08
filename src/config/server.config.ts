@@ -6,8 +6,10 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import authCtrl from '../routes/auth.routes';
+import filesCtrl from '../routes/files.routes';
 import errorCtrl from '../controllers/error.controller';
 import { createConnection } from 'typeorm';
+import { verifyToken } from '../middlewares/auth';
 
 class App {
   private app: Application;
@@ -22,7 +24,7 @@ class App {
 
   private settings() {
     this.app.set('port', process.env.PORT || this.port || 5000);
-    if (process.env.STATE! != 'dev') {
+    if (process.env.STATE! !== 'dev') {
       this.app.set('trust proxy', true);
     }
   }
@@ -42,11 +44,12 @@ class App {
     this.app.use(json({ limit: 5242880 }));
     this.app.use(morgan('dev'));
 
-    // this.app.use('/api', auth.verifyToken);
+    this.app.use('/api', verifyToken);
   }
 
   private routes() {
     this.app.use('/auth', authCtrl);
+    this.app.use('/api', filesCtrl);
   }
 
   private extra() {

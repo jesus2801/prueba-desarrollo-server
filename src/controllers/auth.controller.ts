@@ -126,8 +126,8 @@ export default {
       return res.send(false);
     }
     try {
-      jwt.verify(t!, process.env.SECRET_KEY!);
-      res.send(true);
+      const token = jwt.verify(t!, process.env.SECRET_KEY!);
+      res.json(token);
     } catch (e) {
       res.send(false);
     }

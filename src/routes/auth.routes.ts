@@ -6,12 +6,12 @@ const router = Router();
 router.post(
   '/login',
   [
-    check('mail', 'Please enter a valid email')
+    check('mail', 'Porfavor ingrese un email válido')
       .normalizeEmail()
       .isEmail(),
     check(
       'pass',
-      'Please enter a password of at least 6 characters'
+      'Por favor ingrese una contraseña de 6 carácteres mínimo'
     ).isLength({
       min: 6,
     }),
@@ -22,12 +22,12 @@ router.post(
 router.post(
   '/signup',
   [
-    check('mail', 'Please enter a valid email')
+    check('mail', 'Porfavor ingrese un email válido')
       .normalizeEmail()
       .isEmail(),
     check(
       'pass',
-      'Please enter a password of at least 6 characters'
+      'Por favor ingrese una contraseña de 6 carácteres mínimo'
     ).isLength({
       min: 6,
     }),
